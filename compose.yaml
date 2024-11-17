@@ -24,6 +24,30 @@ services:
       - POSTGRES_USER=${USER_DB_POSTGRES_USER}
     ports:
       - 5432:5432
+    volumes:
+      - user-db-data:/var/lib/postgresql/data
+
+  book-service:
+    container_name: book-service
+    build: ./book_service
+    env_file: .env
+    depends_on:
+      - discovery-service
+      - book-service-db
+    ports:
+      - 8082:8082
+
+  book-service-db:
+    container_name: book-service-db
+    image: "postgres:latest"
+    environment:
+      - POSTGRES_DB=${BOOK_DB_POSTGRES_DB_NAME}
+      - POSTGRES_USER=${BOOK_DB_POSTGRES_USER}
+      - POSTGRES_PASSWORD=${BOOK_DB_POSTGRES_PASSWORD}
+    ports:
+      - 5433:5432
+    volumes:
+      - book-db-data:/var/lib/postgresql/data
 
   api-gateway:
     container_name: api-gateway
@@ -36,3 +60,7 @@ services:
       - user-service
     ports:
       - 8080:8080
+
+volumes:
+  user-db-data:
+  book-db-data:
