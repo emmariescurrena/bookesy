@@ -49,6 +49,28 @@ services:
     volumes:
       - book-db-data:/var/lib/postgresql/data
 
+  review-service:
+    container_name: review-service
+    build: ./review_service
+    env_file: .env
+    depends_on:
+      - discovery-service
+      - review-service-db
+    ports:
+      - 8083:8083
+
+  review-service-db:
+    container_name: review-service-db
+    image: "postgres:latest"
+    environment:
+      - POSTGRES_DB=${REVIEW_DB_POSTGRES_DB_NAME}
+      - POSTGRES_USER=${REVIEW_DB_POSTGRES_USER}
+      - POSTGRES_PASSWORD=${REVIEW_DB_POSTGRES_PASSWORD}
+    ports:
+      - 5434:5432
+    volumes:
+      - review-db-data:/var/lib/postgresql/data
+
   api-gateway:
     container_name: api-gateway
     build: ./api_gateway
@@ -58,9 +80,12 @@ services:
     depends_on:
       - discovery-service
       - user-service
+      - book-service
+      - review-service
     ports:
       - 8080:8080
 
 volumes:
   user-db-data:
   book-db-data:
+  review-db-data:
