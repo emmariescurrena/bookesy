@@ -17,7 +17,7 @@ services:
 
   user-service-db:
     container_name: user-service-db
-    image: "postgres:latest"
+    image: postgres:17.0
     environment:
       - POSTGRES_DB=${USER_DB_POSTGRES_DB_NAME}
       - POSTGRES_PASSWORD=${USER_DB_POSTGRES_PASSWORD}
@@ -39,7 +39,7 @@ services:
 
   book-service-db:
     container_name: book-service-db
-    image: "postgres:latest"
+    image: postgres:17.0
     environment:
       - POSTGRES_DB=${BOOK_DB_POSTGRES_DB_NAME}
       - POSTGRES_USER=${BOOK_DB_POSTGRES_USER}
@@ -61,7 +61,7 @@ services:
 
   review-service-db:
     container_name: review-service-db
-    image: "postgres:latest"
+    image: postgres:17.0
     environment:
       - POSTGRES_DB=${REVIEW_DB_POSTGRES_DB_NAME}
       - POSTGRES_USER=${REVIEW_DB_POSTGRES_USER}
