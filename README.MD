@@ -8,7 +8,6 @@ bookesy is an application that allows users to search books, create a bookshelf 
 - [User service](https://github.com/emmariescurrena/user_service)
 - [Book service](https://github.com/emmariescurrena/book_service)
 - [Review Service](https://github.com/emmariescurrena/review_service)
-- [Recommendation service](https://github.com/emmariescurrena/recommendation-service)
 
 ## Preview (coming soon)
 
